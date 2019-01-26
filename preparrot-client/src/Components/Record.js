@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import Webcam from "react-webcam";
 class Record extends Component {
 
