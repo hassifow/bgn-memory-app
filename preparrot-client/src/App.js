@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Upload from './components/Upload'
+import Record from './components/Record'
 
 // import AppBar from '@material-ui/core/AppBar';
 // import Toolbar from '@material-ui/core/Toolbar';
@@ -20,7 +21,7 @@ class App extends Component {
         <ButtonAppBar />
      
     <Upload />
-  
+  <Record />
 
 
     

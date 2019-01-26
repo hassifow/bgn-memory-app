@@ -2,22 +2,28 @@ import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
 import TextFields from '@material-ui/icons/TextFields';
 import InsertDriveFile from '@material-ui/icons/InsertDriveFile'
-
+import Paper from '@material-ui/core/Paper';
 import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import InputBase from '@material-ui/core/InputBase';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
+import MicIcon from '@material-ui/icons/Mic';
 
 class Upload extends Component {
 
     state = {
         recording: false,
-        overTime: false
+        overTime: false,
+        duration: 0
         
 
         
+    }
+
+    setColor = () => {
+
     }
 
     render() {
@@ -63,14 +69,7 @@ class Upload extends Component {
           fontFamily: [
             '-apple-system',
             'BlinkMacSystemFont',
-            '"Segoe UI"',
-            'Roboto',
-            '"Helvetica Neue"',
-            'Arial',
-            'sans-serif',
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"',
+            '"Segoe UI"'
           ].join(','),
           '&:focus': {
             borderColor: '#80bdff',
@@ -82,17 +81,9 @@ class Upload extends Component {
         },
       });
       
-      // const theme = createMuiTheme({
-      //   palette: {
-      //     primary: green,
-      //   },
-      //   typography: { useNextVariants: true },
-      // });
-
-      
+  
 
       return (
-
         <div className="upload-container">
 
             <div className="text-input-toggle">
@@ -106,6 +97,7 @@ class Upload extends Component {
             </Button>
           </div>
 
+        <Paper>
         <MuiThemeProvider >
           <TextField
          
@@ -121,9 +113,25 @@ class Upload extends Component {
           </MuiThemeProvider>
 
           <div className="textBox">
-          </div>
-          
+              <TextField
+                  id="filled-multiline-static"
+                  label="Multiline"
+                  multiline
+                  rows="4"
+                  defaultValue="Default Value"
+              
+                  margin="normal"
+                  variant="filled"
+          />
+         </div>
+         </Paper>
+         
+         <div className="record-button">
+         <MicIcon /><p>{this.props.time}</p>
+         </div>
+
     </div>
+
 
 
 
