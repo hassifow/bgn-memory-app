@@ -7,9 +7,11 @@
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "dependencies": {
+    "@google-cloud/speech": "^2.2.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "nodemon": "^1.18.9"
+    "nodemon": "^1.18.9",
+    "sox": "^0.1.0"
   },
   "devDependencies": {
     "concurrently": "^4.0.1"
