@@ -9,14 +9,17 @@ import InputBase from '@material-ui/core/InputBase';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
-import MicIcon from '@material-ui/icons/Mic';
+import Mic from '@material-ui/icons/Mic';
+
 
 class Upload extends Component {
 
     state = {
         recording: false,
         overTime: false,
-        duration: 0
+        time: 0,
+        duration: 0,
+        text: ''
         
 
         
@@ -26,6 +29,30 @@ class Upload extends Component {
 
     }
 
+
+    updateTime = () => {
+      this.setState({
+        time: this.state.time + 1
+      });
+    };
+  
+    startRecord = () => {
+      this.setState({recording: true})
+      this.interval = setInterval(this.updateTime, 1000);
+      
+    };
+
+    stopRecord = () => {
+
+    }
+
+    
+      
+
+    handleChange = (event) => {
+      this.setState({[event.target.name]: event.target.value})
+
+    }
     render() {
     
       const styles = theme => ({
@@ -81,7 +108,15 @@ class Upload extends Component {
         },
       });
       
-  
+      const recordColor = {
+        background: this.state.time > this.state.duration ? 'red' : 'blue'
+      };
+
+      const clockColor = {
+        color: this.state.time > this.state.duration ? 'red' : 'blue',
+        padding: '30px',
+        borderRadius:'50%'
+      };
 
       return (
         <div className="upload-container">
@@ -107,7 +142,8 @@ class Upload extends Component {
           <TextField
             
             label="Duration"
-            
+            name="duration"
+            value=""
             id="mui-theme-provider-outlined-input"
           />
           </MuiThemeProvider>
@@ -118,18 +154,28 @@ class Upload extends Component {
                   label="Multiline"
                   multiline
                   rows="4"
-                  defaultValue="Default Value"
-              
+                  value="Paste your speech here"
+                  name="text"
                   margin="normal"
                   variant="filled"
           />
          </div>
          </Paper>
-         
-         <div className="record-button">
-         <MicIcon /><p>{this.props.time}</p>
-         </div>
 
+          {!this.state.recording ?
+         <div className="record-button">
+      
+         <i style={recordColor} id="mic-icon" onClick={this.startRecord} className="material-icons">mic</i>
+         
+         </div>
+         :
+         <div className="record-button">
+         <i style={recordColor} id="mic-icon" className="material-icons  md-48">mic</i>
+         <p style={clockColor}>{this.state.time}/{this.state.duration}</p>
+         </div>}
+
+
+ <Record />
     </div>
 
 

@@ -20,8 +20,8 @@ class App extends Component {
         <header className="App-header">
         <ButtonAppBar />
      
-    <Upload />
-  <Record />
+     <Upload />
+    
 
 
     
