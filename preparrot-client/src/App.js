@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import Upload from './components/Upload'
 import Record from './components/Record'
+import Result from './components/Result'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {  Switch, withRouter } from 'react-router-dom'
 
 // import AppBar from '@material-ui/core/AppBar';
 // import Toolbar from '@material-ui/core/Toolbar';
@@ -16,16 +19,20 @@ import ButtonAppBar from './ButtonAppBar';
 class App extends Component {
   render() {
     return (
+      <Router>
+      <Switch>
       <div className="App">
-        <header className="App-header">
-        <ButtonAppBar />
-     
-     <Upload />
+        {/* <header className="App-header"> */}
+        <ButtonAppBar className="nav" />
+        <Route exact path='/' render={routerProps => <Upload {...routerProps}  />} />
+     <Result />
     
 
+        </Switch>
+          </Router>
 
     
-        </header>
+   
       </div>
     );
   }

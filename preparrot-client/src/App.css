@@ -12,8 +12,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -36,4 +36,51 @@
   /* background:red; */
   padding:30px;
   border-radius: 50%;
+}
+
+.upload-container {
+
+  float: left;
+  padding-right: 4%;
+  width: 50%
+ 
+}
+.webcam {
+  display: inline-block;
+  float: left;
+  width: 25%;
+}
+
+.webcam-container {
+  display: inline-block;
+  float: left;
+  width: 25%;
+}
+
+
+.MuiToolbar-root-40 {
+  display: flex;
+  position: relative;
+  align-items: center;
+  background: white;
+  /* color: black; */
+  /* width: 100%; */
+}
+
+.MuiInputBase-inputMultiline-171 {
+  resize: none;
+  padding: 0;
+  width: 40rem;
+}
+
+.MuiInputBase-input-169  {
+  width: 40rem;
+}
+
+.record-button {
+  display:block;
+}
+
+.nav {
+  margin-bottom: 20%;
 }
