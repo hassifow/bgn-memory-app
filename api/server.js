@@ -14,15 +14,14 @@ app.get('/api/hello', (req, res) => {
 );
 
 app.get('/speech/audio/test', (req, res) => {
-  cloud_speech.detectSpeechInAudioFile().then((a) => {
+const FILENAME = "./resources/test1.wav";
+  cloud_speech.detectSpeechInAudioFile(FILENAME).then((a) => {
     res.json(a)
   }
 );
 
-app.get('/speech/audio/:id', (req, res) => {
-  cloud_speech.detectSpeechInAudioFile().then((a) => {
-    res.json(a)
-  }
+app.get('/speech/audio/:id', (req, res) => {}
+  // connect to database, return url to audio file, and generated speech
 );
 
 //POST REQUESTS
@@ -46,7 +45,7 @@ app.post('/speech/audio', (req, res) => {
 //upload to /resources foler with name saved as ID
 //save url path 
 //connect to cloud speech api and return generated text
-
+res.status(200).json({message: "not yet implemented"})
 });
 
 });
