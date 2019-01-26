@@ -5,6 +5,13 @@ const fs = require("fs");
 // Creates a client
 const client = new speech.SpeechClient();
 
+const config = {
+	  encoding: "LINEAR16",
+	  sampleRateHertz: 44100,
+	  languageCode: "en-US"
+	};
+
+
 // Detects speech in the audio file
 function detectSpeechInAudioFile(fileName) {
 
