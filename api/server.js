@@ -27,12 +27,12 @@ app.get("/api/hello", (req, res) => {
   res.json("Welcome to PreParrot API");
 });
 
-app.get("/speech/audio/test", (req, res) => {
-  const FILENAME = "./resources/test1.wav";
-  cloud_speech.detectSpeechInAudioFile(FILENAME).then(a => {
-    res.json(a);
-  });
-});
+// app.get("/speech/audio/test", (req, res) => {
+//   const FILENAME = "test1.wav";
+//   cloud_speech.detectSpeechInAudioFile(FILENAME).then(a => {
+//     res.json(a);
+//   });
+// });
 
 
 app.get("/speech/audio/:filename", (req, res) => {
