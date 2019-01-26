@@ -8,13 +8,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const multer = require("multer");
-// const UPLOAD_PATH = 'resources';
-//
-// const upload = multer({ dest: `${UPLOAD_PATH}/`,
-//   filename: function (req, file, cb) {
-//     cb(null, file.originalname)
-//   }
-// });
 
 const path = require('path');
 
@@ -40,14 +33,16 @@ app.get("/speech/audio/test", (req, res) => {
     res.json(a);
   });
 });
-  app.get(
-    "/speech/audio/:id",
-    (req, res) => {}
-    // connect to database, return url to audio file, and generated speech
-  );
+
+
+app.get("/speech/audio/:filename", (req, res) => {
+  cloud_speech.detectSpeechInAudioFile(req.params.filename).then(a => {
+    res.json(a);
+  });
+});
 
   //POST REQUESTS
-  app.post("/speech/text", (req, res) => {
+  app.post("/speech/text", (req, res, file) => {
     const text = req.body.text;
 
     if (text === null) {
@@ -55,18 +50,13 @@ app.get("/speech/audio/test", (req, res) => {
     } else {
       //store text in DB
       res.status(200).json({
+        title: req.body.title,
+        filename: file.originalname,
         message: "text sucessfully uploaded",
-        id: "to be returned from database"
+        timestamp: Math.floor(Date.now() / 1000)
       });
     }
   });
-
-  // app.post("/speech/audio", (req, res) => {
-  //   //upload to /resources foler with name saved as ID
-  //   //save url path
-  //   //connect to cloud speech api and return generated text
-  //   res.status(200).json({ message: "not yet implemented" });
-  // });
 
   app.post("/speech/audio", upload.single("audio"), async (req, res) => {
       try {

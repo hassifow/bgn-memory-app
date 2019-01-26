@@ -5,6 +5,8 @@ const fs = require("fs");
 // Creates a client
 const client = new speech.SpeechClient();
 
+const PATH = "./resources/"
+
 const config = {
 	  encoding: "LINEAR16",
 	  sampleRateHertz: 44100,
@@ -15,7 +17,9 @@ const config = {
 // Detects speech in the audio file
 function detectSpeechInAudioFile(fileName) {
 
-  const file = fs.readFileSync(fileName);
+  let filePath = PATH + fileName;
+  
+  const file = fs.readFileSync(filePath);
   const audioBytes = file.toString("base64");
 
   const audio = {
