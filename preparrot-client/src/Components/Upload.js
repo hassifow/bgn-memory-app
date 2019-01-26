@@ -21,8 +21,8 @@ class Upload extends Component {
         overTime: false,
         time: 0,
         duration: 0,
-        text: ''
-        
+        text: '',
+        recordedText: ''
 
         
     }
@@ -38,8 +38,8 @@ class Upload extends Component {
       });
     };
   
-    startRecord = (event) => {
-      this.sendText(event)
+    startRecord = () => {
+
       this.setState({recording: true})
       this.interval = setInterval(this.updateTime, 1000);
       
@@ -47,19 +47,18 @@ class Upload extends Component {
 
     sendText = (e) => {
       e.preventDefault();
-      const response = await fetch('/speech/text', {
+      const response =  fetch('/speech/text', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ text: this.state.text }),
     });
-    const body = await response.text();
+    const body =  response.text();
     this.setState({ responseToPost: body });
   };
-    }
-
-
+    
+    
 
     stopRecord = () => {
 

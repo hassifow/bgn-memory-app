@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import Paper from '@material-ui/core/Paper';
+
 
 class Result extends Component {
+
 
 clearText = (originalText) => {
     
@@ -12,9 +15,12 @@ clearText = (originalText) => {
 
     render() {
       return (
-
-<h1>hi</h1>
-
+<div>
+        <Paper></Paper>
+        <Paper></Paper>
+        <Paper></Paper>
+        <Paper></Paper>
+</div>
 
 
       )
