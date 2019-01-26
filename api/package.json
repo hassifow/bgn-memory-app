@@ -10,6 +10,7 @@
     "@google-cloud/speech": "^2.2.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "multer": "^1.4.1",
     "nodemon": "^1.18.9",
     "sox": "^0.1.0"
   },
