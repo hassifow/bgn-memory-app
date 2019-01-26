@@ -8,8 +8,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/api/hello', (req, res) => {
-  let a = cloud_speech.detectSpeechInAudioFile();
-  res.json("HELLO TO BGN MEMORY APP API!")
+  cloud_speech.detectSpeechInAudioFile().then((a) => {
+    console.log(a);
+    res.json(a)
+  }
+);
+
 });
 app.post('/api/world', (req, res) => {
   console.log(req.body);
