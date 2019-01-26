@@ -8,13 +8,27 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const multer = require("multer");
+// const UPLOAD_PATH = 'resources';
+//
+// const upload = multer({ dest: `${UPLOAD_PATH}/`,
+//   filename: function (req, file, cb) {
+//     cb(null, file.originalname)
+//   }
+// });
 
-const storage = multer.diskStorage({
-  destination: "/resources",
-  filename: function(req, file, callback) {
-    //..
-  }
-});
+const path = require('path');
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb){
+    cb(null, 'resources')
+  },
+    filename: function (req, file, cb) {
+      cb(null, path.parse(file.originalname).name + '-' + (Math.floor(Date.now() / 1000))+'.wav')
+    }
+})
+
+const upload = multer({storage: storage});
+
 //GET REQUESTS
 app.get("/api/hello", (req, res) => {
   res.json("Welcome to PreParrot API");
@@ -25,7 +39,7 @@ app.get("/speech/audio/test", (req, res) => {
   cloud_speech.detectSpeechInAudioFile(FILENAME).then(a => {
     res.json(a);
   });
-
+});
   app.get(
     "/speech/audio/:id",
     (req, res) => {}
@@ -47,31 +61,21 @@ app.get("/speech/audio/test", (req, res) => {
     }
   });
 
-  app.post("/speech/audio", (req, res) => {
-    //upload to /resources foler with name saved as ID
-    //save url path
-    //connect to cloud speech api and return generated text
-    res.status(200).json({ message: "not yet implemented" });
-  });
+  // app.post("/speech/audio", (req, res) => {
+  //   //upload to /resources foler with name saved as ID
+  //   //save url path
+  //   //connect to cloud speech api and return generated text
+  //   res.status(200).json({ message: "not yet implemented" });
+  // });
 
-  app.post("/speech/audio", upload.single("audio"), (req, res) => {
-    if (!req.file) {
-      console.log("No file received");
-      return res.send({
-        success: false
-      });
-    } else {
-      const host = req.host;
-
-      const filePath = req.protocol + "://" + host + "/" + req.file.path;
-
-      //save filepath in db
-      res.status(200).json({
-        message: "file successfully uploaded",
-        filePath: filePath
-      });
-    }
-  });
-});
+  app.post("/speech/audio", upload.single("audio"), async (req, res) => {
+      try {
+        res.status(200).json({
+          message: "file successfully uploaded",
+        });
+      } catch (err) {
+        res.sendStatus(400);
+      }
+    });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
